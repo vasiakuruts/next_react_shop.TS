@@ -17,7 +17,7 @@ export default function Home() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Provider store={store}>
-				<PersistGate loading={<Loading />} persistor={() => persistor}>
+				<PersistGate loading={<Loading />} persistor={persistor}>
 					<App />
 				</PersistGate>
 			</Provider>
