@@ -1,13 +1,13 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import {
-	FLUSH,
-	PAUSE,
-	PERSIST,
-	PURGE,
-	REGISTER,
-	REHYDRATE,
-	persistReducer,
-	persistStore
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
@@ -16,27 +16,27 @@ import { cartSlice } from './cart/cart.slice'
 import { userSlice } from './user/usrer.slice'
 
 const persistConfig = {
-	key: 'Shop',
-	storage,
-	whitelist: ['cart']
+  key: 'Shop',
+  storage,
+  whitelist: ['cart']
 }
 
 const rootReducer = combineReducers({
-	cart: cartSlice.reducer,
-	carousel: carouselSlice.reducer,
-	user: userSlice.reducer
+  cart: cartSlice.reducer,
+  carousel: carouselSlice.reducer,
+  user: userSlice.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
-	reducer: persistedReducer,
-	middleware: getDefaultMiddleware =>
-		getDefaultMiddleware({
-			serializableCheck: {
-				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-			}
-		})
+  reducer: persistedReducer,
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+      }
+    })
 })
 
 export const persistor = persistStore(store)
