@@ -15,11 +15,19 @@ const AuthProvider: FC<PropsWithChildren<TComponentAuthFields>> = ({
   const { user } = useAuth()
   const { checkAuth, logOut } = useActions()
   const { pathname } = useRouter()
+  let x
 
   useEffect(() => {
     const accessToken = getAccessToken()
-    if (!accessToken) return
-    checkAuth()
+    console.log('====================================')
+    console.log('AuthProvider.tsx', 21, !accessToken, isOnlyUser)
+    console.log('====================================')
+
+    if (!accessToken) {
+      return undefined
+    } else {
+      checkAuth()
+    }
   }, [])
 
   useEffect(() => {

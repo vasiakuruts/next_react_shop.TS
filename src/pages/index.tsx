@@ -1,10 +1,10 @@
-import { NextPageAuth } from '@/provider/auth-provider/auth-page.types'
+import { NextPage } from 'next'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const HomePage: NextPageAuth = () => {
-  return <div>HOME</div>
+const HomePage: NextPage = () => {
+  return <h1 className='text-3x1 font-bold underline'> Hello world!</h1>
 }
 
 export default HomePage
