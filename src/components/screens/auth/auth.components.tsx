@@ -1,6 +1,7 @@
 import Button from '@/components/ui/button/button'
 import Heading from '@/components/ui/heading/heading'
 import Field from '@/components/ui/input/field'
+import FieldPassword from '@/components/ui/input/field-password'
 import Loader from '@/components/ui/loader/loader'
 import Meta from '@/components/ui/meta/meta'
 import { useActions } from '@/hooks/useActions'
@@ -9,7 +10,15 @@ import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 import { IEmailPassword } from '@/store/user/user.interface'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import {
+  AiOutlineEye,
+  AiOutlineEyeInvisible,
+  AiOutlineLock,
+  AiOutlineMail
+} from 'react-icons/ai'
 import { validEmail } from './valid-email'
+;<AiOutlineEyeInvisible />
+;<AiOutlineEye />
 
 const AuthComponents: FC = () => {
   useAuthRedirect()
@@ -36,7 +45,7 @@ const AuthComponents: FC = () => {
       <section className='flex h-screen '>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className='rounded-lg bg-white shadow-sm border p-8 m-auto  '
+          className='rounded-lg bg-white shadow-sm border p-8 m-auto  max-w-md'
         >
           <Heading className='capitalize text-center mb-4'>{type}</Heading>
           {isLoading ? (
@@ -53,8 +62,9 @@ const AuthComponents: FC = () => {
                 })}
                 placeholder='Email'
                 error={errors.email?.message}
+                Icon={AiOutlineMail}
               />
-              <Field
+              <FieldPassword
                 {...formRegister('password', {
                   required: 'Password is required',
                   minLength: {
@@ -62,9 +72,9 @@ const AuthComponents: FC = () => {
                     message: 'Min length should more 6 symbols'
                   }
                 })}
-                type='password'
                 placeholder='Password'
                 error={errors.password?.message}
+                Icon={AiOutlineLock}
               />
               <Button type='submit' variant='orange'>
                 Let's go!
