@@ -1,7 +1,13 @@
+import Heading from '@/components/ui/heading/heading'
+import Meta from '@/components/ui/meta/meta'
 import { FC } from 'react'
 
 const HomeComponents: FC = () => {
-  return <h1 className='text-3x1 font-bold underline'> Hello world!</h1>
+  return (
+    <Meta title='Home'>
+      <Heading>Hello world!</Heading>
+    </Meta>
+  )
 }
 
 export default HomeComponents

@@ -1,8 +1,8 @@
 import { IProduct } from './product.interface'
 
 export interface ICartItem {
-	id: number
-	productId: IProduct
-	quantity: number
-	price: number
+  id: number
+  product: IProduct
+  quantity: number
+  price: number
 }
