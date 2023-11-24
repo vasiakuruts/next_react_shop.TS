@@ -1,30 +1,25 @@
-// import { useProfile } from '@/hooks/useProfile'
-// import { FC } from 'react'
-// import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import { useProfile } from '@/hooks/useProfile'
+import { userService } from '@/services/user/user.service'
+import { useMutation } from '@tanstack/react-query'
+import { FC } from 'react'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
-// const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
-//   const { profile } = useProfile()
+const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
+  const { profile } = useProfile()
 
-//   const isExists = profile.find(
-//     cartItem => cartItem.product.id === product.id
-//   )
-//   return (
-//     <div>
-//       <button
-//         onClick={() =>
-//           isExists
-//             ? removeFromCart({ id: isExists.id })
-//             : addToCart({
-//                 product,
-//                 quantity: 1,
-//                 price: product.price
-//               })
-//         }
-//       >
-//         {isExists ? <AiFillHeart /> : <AiOutlineHeart />}
-//       </button>
-//     </div>
-//   )
-// }
+  const { mutate } = useMutation({
+    mutationKey: ['toggle favorite'],
+    mutationFn: () => userService.toggleFavorite(productId)
+  })
 
-// export default FavoriteButton
+  const isExists = profile.favorites.some(favorite => favorite.id === productId)
+  return (
+    <div>
+      <button onClick={() => mutate()}>
+        {isExists ? <AiFillHeart /> : <AiOutlineHeart />}
+      </button>
+    </div>
+  )
+}
+
+export default FavoriteButton
