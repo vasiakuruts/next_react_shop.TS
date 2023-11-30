@@ -1,7 +1,5 @@
-import { getContentType } from '@/api/api.halper'
 import { axiosClassic } from '@/api/api.interceptor'
 import { IAuthResponse, IEmailPassword } from '@/store/user/user.interface'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 import { saveToStorage } from './auth.helper'
 
