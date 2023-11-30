@@ -18,8 +18,10 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
                     alt={product.name}
                 />
             </div>
-            <h3>{product.name}</h3>
-            <div>{product.category.name}</div>
+            <h3 className='mb-1'>{product.name}</h3>
+            <div className='text-aqua text-sm mb-2'>
+                {product.category.name}
+            </div>
             <ProductRating product={product} />
             <div>{product.price}</div>
         </div>
