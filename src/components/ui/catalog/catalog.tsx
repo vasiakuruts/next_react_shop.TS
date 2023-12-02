@@ -1,8 +1,8 @@
 import { IProduct } from '@/types/product.interface'
 import { FC } from 'react'
+import Heading from '../heading/heading'
 import Loader from '../loader/loader'
 import ProductItem from './product-item/product-item'
-import Heading from '../heading/heading'
 
 interface ICatalog {
     products: IProduct[]
@@ -16,9 +16,11 @@ const Catalog: FC<ICatalog> = ({ products, isLoading, title }) => {
         <section>
             {title && <Heading>{title}</Heading>}
             {products.length ? (
-                products.map(product => (
-                    <ProductItem key={product.id} product={product} />
-                ))
+                <div className='grid grid-cols-4 gap-10'>
+                    {products.map(product => (
+                        <ProductItem key={product.id} product={product} />
+                    ))}
+                </div>
             ) : (
                 <div>There are no products</div>
             )}

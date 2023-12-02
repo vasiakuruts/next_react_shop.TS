@@ -19,10 +19,6 @@ export const ReviewsService = {
     },
 
     async getAverageByProduct(productId: number | string) {
-        console.log('====================================')
-        console.log('review.service.ts', 22, productId)
-        console.log('====================================')
-
         return axiosClassic<number>({
             url: `/reviews/${productId}`,
             method: 'GET'

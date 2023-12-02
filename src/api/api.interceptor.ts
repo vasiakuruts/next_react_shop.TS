@@ -2,6 +2,7 @@ import { getAccessToken, removeFromStorage } from '@/services/auth/auth.helper'
 import { AuthService } from '@/services/auth/auth.service'
 import axios from 'axios'
 import { errorCatch, getContentType } from './api.halper'
+
 const axiosOptions = {
     baseURL: process.env.SERVER_URL,
     headers: getContentType()
@@ -11,11 +12,12 @@ export const axiosClassic = axios.create(axiosOptions)
 export const instance = axios.create(axiosOptions)
 
 instance.interceptors.request.use(async config => {
-    const accessToken = getAccessToken()
+    const accessToken = await getAccessToken()
 
     if (config.headers && accessToken) {
         config.headers.Authorization = `Bearer ${accessToken}`
     }
+
     return config
 })
 
