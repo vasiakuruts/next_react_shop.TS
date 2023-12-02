@@ -20,7 +20,7 @@ export const userService = {
 
     async toggleFavorite(productId: number | string) {
         return instance<IUser>({
-            url: `/users/profilefavorites${productId}`,
+            url: `/users/profile/favorites/${productId}`,
             method: 'PATCH'
         })
     }
