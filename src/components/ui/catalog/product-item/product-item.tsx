@@ -15,7 +15,7 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
     return (
         <div>
             <div className='bg-white rounded-xl  relative overflow-hidden w-full'>
-                <div className='absolute top-2 right-2 z-10'>
+                <div className='absolute top-2 right-3 z-10'>
                     <DynamicFavorteButton productId={product.id} />
                     <AddToCartButton product={product} />
                 </div>
@@ -30,7 +30,7 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
                 </Link>
             </div>
             <Link href={`/product/${product.slug}`}>
-                <h3 className='mb-1'>{product.name}</h3>
+                <h3 className='mt-2 font-semibold text-lg '>{product.name}</h3>
             </Link>
             <Link
                 href={`/category/${product.category.slug}`}

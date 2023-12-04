@@ -11,12 +11,13 @@ const AddToCartButton: FC<{ product: IProduct }> = ({ product }) => {
     const currentElement = items.find(
         cartItem => cartItem.product.id === product.id
     )
+
     return (
         <div>
             <button
                 className='text-secondary'
                 onClick={() =>
-                    currentElement
+                    !!currentElement
                         ? removeFromCart({ id: currentElement.id })
                         : addToCart({
                               product,
