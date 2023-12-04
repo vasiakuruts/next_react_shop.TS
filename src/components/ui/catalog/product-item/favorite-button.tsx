@@ -7,12 +7,13 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
     const { profile } = useProfile()
 
-    const { invalidateQueries } = useQueryClient()
+    const queryClient = useQueryClient()
 
     const { mutate } = useMutation({
         mutationKey: ['toggle favorite'],
         mutationFn: () => userService.toggleFavorite(productId),
-        onSuccess: () => invalidateQueries({ queryKey: ['get profile'] })
+        onSuccess: () =>
+            queryClient.invalidateQueries({ queryKey: ['get profile'] })
     })
 
     if (!profile) return null
