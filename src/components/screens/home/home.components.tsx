@@ -12,7 +12,6 @@ const HomeComponents: FC<TPaginationProducts> = ({ products, length }) => {
     return (
         <Meta title='Home'>
             <Layout>
-                {!!user && <button onClick={() => logOut()}>Logout</button>}
                 <Catalog title='Freshed products' products={products || []} />
             </Layout>
         </Meta>
