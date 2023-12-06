@@ -6,20 +6,15 @@ import Loader from '@/components/ui/loader/loader'
 import Meta from '@/components/ui/meta/meta'
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
+import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 import { IEmailPassword } from '@/store/user/user.interface'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import {
-    AiOutlineEye,
-    AiOutlineEyeInvisible,
-    AiOutlineLock,
-    AiOutlineMail
-} from 'react-icons/ai'
+import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai'
 import { validEmail } from './valid-email'
-;<AiOutlineEyeInvisible />
-;<AiOutlineEye />
 
 const AuthComponents: FC = () => {
+    useAuthRedirect()
     const { isLoading } = useAuth()
     const { login, register } = useActions()
 
@@ -34,6 +29,8 @@ const AuthComponents: FC = () => {
     })
     const onSubmit: SubmitHandler<IEmailPassword> = data => {
         if (type === 'login') {
+
+
             login(data)
         } else register(data)
         reset()
