@@ -29,71 +29,64 @@ const AuthComponents: FC = () => {
     })
     const onSubmit: SubmitHandler<IEmailPassword> = data => {
         if (type === 'login') {
-
-
             login(data)
         } else register(data)
         reset()
     }
     return (
-        <Meta title='Auth'>
-            <section className='flex h-screen '>
-                <form
-                    onSubmit={handleSubmit(onSubmit)}
-                    className='rounded-lg bg-white shadow-sm border p-8 m-auto  max-w-md'
-                >
-                    <Heading className='capitalize text-center mb-4'>
-                        {type}
-                    </Heading>
-                    {isLoading ? (
-                        <Loader />
-                    ) : (
-                        <>
-                            <Field
-                                {...formRegister('email', {
-                                    required: 'Email is required',
-                                    pattern: {
-                                        value: validEmail,
-                                        message:
-                                            'Please enter a valid email address'
-                                    }
-                                })}
-                                placeholder='Email'
-                                error={errors.email?.message}
-                                Icon={AiOutlineMail}
-                            />
-                            <FieldPassword
-                                {...formRegister('password', {
-                                    required: 'Password is required',
-                                    minLength: {
-                                        value: 6,
-                                        message:
-                                            'Min length should more 6 symbols'
-                                    }
-                                })}
-                                placeholder='Password'
-                                error={errors.password?.message}
-                                Icon={AiOutlineLock}
-                            />
-                            <Button type='submit' variant='orange'>
-                                Let's go!
-                            </Button>
-                            <button
-                                type='button'
-                                className='inline-block opacity-50 mb-3 ml-5 capitalize'
-                                onClick={() =>
-                                    setType(
-                                        type === 'login' ? 'register' : 'login'
-                                    )
+        <section className='flex h-screen '>
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className='rounded-lg bg-white shadow-sm border p-8 m-auto  max-w-md'
+            >
+                <Heading className='capitalize text-center mb-4'>
+                    {type}
+                </Heading>
+                {isLoading ? (
+                    <Loader />
+                ) : (
+                    <>
+                        <Field
+                            {...formRegister('email', {
+                                required: 'Email is required',
+                                pattern: {
+                                    value: validEmail,
+                                    message:
+                                        'Please enter a valid email address'
                                 }
-                            >
-                                {type === 'login' ? 'register' : 'login'}
-                            </button>
-                        </>
-                    )}
-                </form>
-            </section>
-        </Meta>
+                            })}
+                            placeholder='Email'
+                            error={errors.email?.message}
+                            Icon={AiOutlineMail}
+                        />
+                        <FieldPassword
+                            {...formRegister('password', {
+                                required: 'Password is required',
+                                minLength: {
+                                    value: 6,
+                                    message: 'Min length should more 6 symbols'
+                                }
+                            })}
+                            placeholder='Password'
+                            error={errors.password?.message}
+                            Icon={AiOutlineLock}
+                        />
+                        <Button type='submit' variant='orange'>
+                            Let's go!
+                        </Button>
+                        <button
+                            type='button'
+                            className='inline-block opacity-50 mb-3 ml-5 capitalize'
+                            onClick={() =>
+                                setType(type === 'login' ? 'register' : 'login')
+                            }
+                        >
+                            {type === 'login' ? 'register' : 'login'}
+                        </button>
+                    </>
+                )}
+            </form>
+        </section>
     )
 }
 
