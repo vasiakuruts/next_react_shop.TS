@@ -8,7 +8,7 @@ const FieldPassword = forwardRef<HTMLInputElement, IField>(
     { placeholder, error, className, type = 'password', style, Icon, ...rest },
     ref
   ) => {
-    const [isVisibilyty, setVisibilyty] = useState(false)
+    const [isHidden, setIsHidden] = useState(false)
 
     return (
       <div className={cn('mb-4 ', className)} style={style}>
@@ -20,7 +20,7 @@ const FieldPassword = forwardRef<HTMLInputElement, IField>(
           <div className=' relative w-full'>
             <input
               ref={ref}
-              type={isVisibilyty ? 'text' : 'password'}
+              type={isHidden ? 'text' : 'password'}
               placeholder={placeholder}
               {...rest}
               className={cn(
@@ -32,9 +32,9 @@ const FieldPassword = forwardRef<HTMLInputElement, IField>(
             />
             <image
               className=' cursor-pointer absolute w-5 right-3 top-3 '
-              onClick={() => setVisibilyty(!isVisibilyty)}
+              onClick={() => setIsHidden(!isHidden)}
             >
-              {isVisibilyty ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+              {isHidden ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
             </image>
           </div>
         </label>

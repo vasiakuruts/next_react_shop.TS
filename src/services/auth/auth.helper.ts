@@ -29,7 +29,4 @@ export const removeFromStorage = () => {
 export const saveToStorage = (data: IAuthResponse) => {
     saveTokensStorage(data)
     localStorage.setItem('user', JSON.stringify(data.user))
-    console.log('====================================')
-    console.log('auth.helper.ts', 34, data)
-    console.log('====================================')
 }
