@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { FC } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
+
 const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
     const { profile } = useProfile()
 
@@ -24,7 +25,7 @@ const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
 
     return (
         <div>
-            <button className='text-primary' onClick={() => mutate()}>
+            <button className=' text-primary z-20' onClick={() => mutate()}>
                 {isExists ? <AiFillHeart /> : <AiOutlineHeart />}
             </button>
         </div>

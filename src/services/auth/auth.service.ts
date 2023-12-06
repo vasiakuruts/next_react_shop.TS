@@ -11,7 +11,7 @@ export const AuthService = {
             data
         })
 
-        if (!response.data.accessToken) saveToStorage(response.data)
+        if (!!response.data.accessToken) saveToStorage(response.data)
 
         return response.data
     },
@@ -24,7 +24,7 @@ export const AuthService = {
             { data: IAuthResponse }
         >('/auth/login/access-token', { refreshToken })
 
-        if (!response.data.accessToken) saveToStorage(response.data)
+        if (!!response.data.accessToken) saveToStorage(response.data)
         return response
     }
 }
