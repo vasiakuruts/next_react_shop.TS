@@ -16,7 +16,7 @@ const Catalog: FC<ICatalog> = ({ products, isLoading, title }) => {
         <section>
             {title && <Heading className='mb-5'>{title}</Heading>}
             {products.length ? (
-                <div className='grid grid-cols-4 gap-10'>
+                <div className='grid grid-cols-5 max-md:grid-cols-2 max-sm:grid-cols-1 max-lg:grid-cols-3 max-xl:grid-cols-4 gap-10'>
                     {products.map(product => (
                         <ProductItem key={product.id} product={product} />
                     ))}
