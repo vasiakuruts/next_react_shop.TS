@@ -33,7 +33,7 @@ export const ProductService = {
     },
 
     async getByCategory(categorySlug: string) {
-        return axiosClassic<IProduct>({
+        return axiosClassic<IProduct[]>({
             url: `/products/by-category/${categorySlug}`,
             method: 'GET'
         })
