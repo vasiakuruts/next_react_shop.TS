@@ -14,7 +14,7 @@ const DynamicFavorteButton = dynamic(() => import('./favorite-button'), {
 const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
     return (
         <div>
-            <div className='bg-white rounded-xl  relative overflow-hidden w-64'>
+            <div className='bg-white rounded-xl  relative overflow-hidden'>
                 <div className='absolute top-2 right-3 '>
                     <DynamicFavorteButton productId={product.id} />
                     <AddToCartButton product={product} />
@@ -25,7 +25,7 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
                         height={250}
                         src={product.images[0]}
                         alt={product.name}
-                        style={{ height: '250px', width: '256px' }}
+                        style={{ height: '250px' }}
                     />
                 </Link>
             </div>
