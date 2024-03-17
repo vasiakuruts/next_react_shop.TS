@@ -11,7 +11,9 @@ const AddToCartButton: FC<{ product: IProduct }> = ({ product }) => {
     const currentElement = items.find(
         cartItem => cartItem.product.id === product.id
     )
-
+    console.log('====================================')
+    console.log(items)
+    console.log('====================================')
     return (
         <div>
             <button
