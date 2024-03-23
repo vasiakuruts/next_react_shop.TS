@@ -8,6 +8,7 @@ export interface IAddToCartPayload extends Omit<ICartItem, 'id'> {}
 
 export interface IChangeQuntityPayload extends Pick<ICartItem, 'id'> {
     type?: 'minus' | 'plus'
+    quntity?: number
 }
 
 export type TSize = 'SHORT' | 'TALL' | 'GRANDE' | 'VENTI'
