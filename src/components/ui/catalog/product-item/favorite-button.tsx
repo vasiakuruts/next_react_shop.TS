@@ -4,8 +4,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { FC } from 'react'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
-
-const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
+const FavoriteButton: FC<{ productId: number; size?: number }> = ({
+    productId,
+    size
+}) => {
     const { profile } = useProfile()
 
     const queryClient = useQueryClient()
@@ -26,7 +28,11 @@ const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
     return (
         <div>
             <button className=' text-primary z-20' onClick={() => mutate()}>
-                {isExists ? <AiFillHeart /> : <AiOutlineHeart />}
+                {isExists ? (
+                    <AiFillHeart size={size} />
+                ) : (
+                    <AiOutlineHeart size={size} />
+                )}
             </button>
         </div>
     )
