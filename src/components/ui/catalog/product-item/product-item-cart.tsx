@@ -34,65 +34,70 @@ const ProductItemCart: FC<{ items: ICartItem }> = ({ items }) => {
             setInputValue(1)
         }
     }
-
-    // Обробник подання форми
     const handleSubmit = (event: any) => {
         event.preventDefault()
-        // Використання значення, що було введене користувачем
         changeQuntity({
             id: items.id,
             quntity: inputValue
         })
         setIsHiddenOk(true)
-        // Тут ви можете виконати додаткові дії зі значенням, наприклад, передати його до іншого компонента або до сервера
     }
     return (
-        <div className=' pb-4'>
-            <div className=' flex  items-center bg-white rounded-xl overflow-hidden'>
-                <DynamicFavorteButton productId={items.product.id} />
-                <Link
-                    style={{ padding: '10px 30px' }}
-                    href={`/product/${items.product.slug}`}
-                >
-                    <Image
-                        width={80}
-                        height={80}
-                        src={items.product.images[0]}
-                        alt={items.product.name}
-                        style={{
-                            width: '80px',
-                            height: '80px',
-                            border: '1px solid #000000'
-                        }}
-                    />
-                </Link>
+        <div className='flex items-center bg-white rounded-xl overflow-hidden mb-4'>
+            <div className='m-2'>
+                <DynamicFavorteButton size={30} productId={items.product.id} />
+            </div>
+            <Link href={`/product/${items.product.slug}`}>
+                <Image
+                    width={80}
+                    height={80}
+                    src={items.product.images[0]}
+                    alt={items.product.name}
+                    className=' w-1/6'
+                    style={{
+                        width: '80px',
+                        height: '80px',
+                        border: '1px solid #000000'
+                    }}
+                />
+            </Link>
+            <div className='ml-4 w-1/4 border-2 mr-4'>
                 <Link href={`/product/${items.product.slug}`}>
-                    <h3 className='mt-2 font-semibold text-lg w-80'>
+                    <h3 className='font-semibold text-lg'>
                         {items.product.name}
                     </h3>
                 </Link>
-                <div className=' text-xl font-semibold flex justify-around w-1/3'>
+            </div>
+            <div className='flex justify-around mt-6 w-1/3'>
+                <div className='mr-4 border-2 w-1/4'>
+                    <h2 className='font-semibold'>Price</h2>
                     {convertPrice(items.product.price)}
-
-                    <form onSubmit={handleSubmit} className=''>
-                        {/* Введення користувача зберігається в стані */}
+                </div>
+                <div className=' w-1/3 border-2 mr-4'>
+                    <h2 className='font-semibold'>Amount</h2>
+                    <form onSubmit={handleSubmit} className=' flex mr-4'>
                         <input
                             type='number'
-                            className=' w-10'
+                            className='w-10 action:border-hidden'
                             value={inputValue}
                             onChange={handleChange}
                         />
-                        <Button
-                            className='w-5'
-                            variant='orange'
+                        <button
+                            className=' w-10'
                             type='submit'
                             hidden={isHiddenOk}
                         >
                             <AiFillCaretLeft />
-                        </Button>
+                        </button>
                     </form>
+                </div>
+                <div className='w-1/2 border-2'>
+                    <h2 className='font-semibold'>Common price</h2>
                     <h2>{convertPrice(items.price * items.quantity)}</h2>
                 </div>
+            </div>
+
+            <div className=' flex items-center w-1/4 ml-auto'>
                 <Button
                     variant='orange'
                     onClick={() =>

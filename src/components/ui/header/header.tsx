@@ -1,15 +1,22 @@
 import AuthComponents from '@/components/screens/auth/auth.components'
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
+
 import { useProfile } from '@/hooks/useProfile'
 import { FC, useState } from 'react'
+
+import { useCart } from '@/hooks/useCart'
 import { IoLogIn, IoLogInOutline, IoLogOut } from 'react-icons/io5'
+import CartCount from '../button/catrs_count'
+import CatalogCart from '../catalog/catalogCart'
 import Heading from '../heading/heading'
-;<IoLogOut />
 
 const Header: FC = () => {
     const [isHiddenAuth, setHiddenAuth] = useState(false)
     const [isHiddenOption, setHiddenOption] = useState(false)
+    const [isHiddenCart, setHiddenCart] = useState(false)
+
+    const { items } = useCart()
     const { user } = useAuth()
     const { profile } = useProfile()
     const { logOut } = useActions()
@@ -18,6 +25,21 @@ const Header: FC = () => {
             <Heading className=' w-full text-center text-white pb-6'>
                 Header
             </Heading>
+            <CartCount
+                onClick={() => {
+                    if (items.length !== 0) setHiddenCart(!isHiddenCart)
+                }}
+            />
+            {isHiddenCart && (
+                <div
+                    className={
+                        ' absolute top-16 left-1/2 -translate-x-1/2 p-5 max-h-full overflow-y-auto z-10 bg-black rounded-xl'
+                    }
+                >
+                    <CatalogCart items={items || []} />
+                </div>
+            )}
+
             {!!user ? (
                 <>
                     <div className=' flex'>
