@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 import AddToCartButton from './add-to-cart-button'
-import ProductRating from './product-rating'
 
 const DynamicFavorteButton = dynamic(() => import('./favorite-button'), {
     ssr: false
@@ -38,7 +37,7 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
             >
                 {product.category.name}
             </Link>
-            <ProductRating product={product} />
+            {/* <ProductRating product={product} /> */}
             <div className=' text-xl font-semibold'>
                 {convertPrice(product.price)}
             </div>
