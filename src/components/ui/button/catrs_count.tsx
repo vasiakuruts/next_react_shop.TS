@@ -18,13 +18,22 @@ const CartCount: FC<PropsWithChildren<IButton>> = ({
     return (
         <>
             <button {...rest} className={cn('mr-5', className)}>
-                <h1
-                    className=' absolute font-bold text-xl -mt-1 z-10 font-mono'
-                    style={{ paddingLeft: '5px', color: 'white' }}
-                >
-                    {items.length}
-                </h1>
-                <GiPlainCircle className=' absolute' size={23} color='red' />
+                {items.length !== 0 && (
+                    <>
+                        <h1
+                            className=' absolute font-bold text-xl -mt-1 z-10 font-mono'
+                            style={{ paddingLeft: '5px', color: 'white' }}
+                        >
+                            {items.length}
+                        </h1>
+                        <GiPlainCircle
+                            className=' absolute'
+                            size={23}
+                            color='red'
+                        />
+                    </>
+                )}
+
                 <AiOutlineShoppingCart
                     className=' -ml-5'
                     size={40}

@@ -5,7 +5,7 @@ import { useCart } from '@/hooks/useCart'
 const ProductPage = () => {
     const { items } = useCart()
     return (
-        <Meta title='Category'>
+        <Meta title='Cart'>
             <Layout>
                 <CatalogCart title={`Cart`} items={items || []} />
             </Layout>
