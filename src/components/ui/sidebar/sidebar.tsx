@@ -3,12 +3,13 @@ import { CategoryService } from '@/services/category/category.service'
 import { ICategory } from '@/types/category.interface'
 import router from 'next/router'
 import { FC, useEffect, useState } from 'react'
-import { IoLogOut } from 'react-icons/io5'
+import { AiFillCaretDown, AiFillCaretRight, AiFillHome } from 'react-icons/ai'
 import Heading from '../heading/heading'
 
 const Sidebar: FC<{ isHidden: boolean }> = ({ isHidden }) => {
     const [isCatHidden, setIsCatHidden] = useState(false)
     const [categorys, setCategorys] = useState<ICategory[]>([])
+
     const { items } = useCart()
     const fetchCategory = async () => {
         try {
@@ -30,27 +31,29 @@ const Sidebar: FC<{ isHidden: boolean }> = ({ isHidden }) => {
     }
     return (
         <aside
-            className=' h-screen bg-secondary'
+            className=' p-5 max-h-full overflow-y-auto bg-secondary'
             style={{ display: `${isHidden ? 'block' : 'none'}` }}
         >
             <Heading className=' w-full text-center pb-6'>SIDEBAR</Heading>
 
             <div className=' flex flex-col'>
                 <button onClick={() => router.push('/')}>
-                    <div className='flex bg-primary rounded mr-6 justify-between'>
+                    <div className='flex bg-primary rounded mr-6 justify-between mb-2'>
                         <Heading className=' text-white flex '>Home</Heading>
-                        <IoLogOut className='' color='white' size={'35px'} />
+                        <AiFillHome color='white' size={'35px'} />
                     </div>
                 </button>
                 <button onClick={() => setIsCatHidden(!isCatHidden)}>
-                    <div className='flex bg-primary rounded mr-6 justify-between'>
-                        <Heading className=' text-white flex '>
-                            Category
-                        </Heading>
-                        <IoLogOut className='' color='white' size={'35px'} />
+                    <div className='flex bg-primary rounded mr-6 justify-between mb-2'>
+                        <Heading className=' text-white flex'>Category</Heading>
+                        {isCatHidden ? (
+                            <AiFillCaretDown color='white' size={'35px'} />
+                        ) : (
+                            <AiFillCaretRight color='white' size={'35px'} />
+                        )}
                     </div>
                     {isCatHidden && (
-                        <div className='ml-4 flex flex-col'>
+                        <div className='ml-4 flex flex-col mb-2'>
                             {categorys.map(category => (
                                 <button
                                     onClick={() =>
@@ -59,12 +62,11 @@ const Sidebar: FC<{ isHidden: boolean }> = ({ isHidden }) => {
                                         )
                                     }
                                 >
-                                    <div className='flex bg-primary rounded mr-6 justify-between'>
-                                        <Heading className=' text-white flex '>
+                                    <div className='flex bg-primary rounded mr-6 justify-between mb-1'>
+                                        <h2 className='font-semibold text-2xl text-white'>
                                             {category.name}
-                                        </Heading>
-                                        <IoLogOut
-                                            className=''
+                                        </h2>
+                                        <AiFillCaretRight
                                             color='white'
                                             size={'35px'}
                                         />

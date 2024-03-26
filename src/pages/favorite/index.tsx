@@ -6,9 +6,6 @@ import { useProfile } from '@/hooks/useProfile'
 const ProductPage = () => {
     const { profile } = useProfile()
     if (!profile) return null
-    console.log('====================================')
-    console.log(profile.favorites)
-    console.log('====================================')
     return (
         <Meta title='Favorite'>
             <Layout>
