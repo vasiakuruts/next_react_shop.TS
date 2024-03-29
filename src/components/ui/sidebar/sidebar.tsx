@@ -1,14 +1,21 @@
 import { useCart } from '@/hooks/useCart'
 import { CategoryService } from '@/services/category/category.service'
 import { ICategory } from '@/types/category.interface'
-import router from 'next/router'
+import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
-import { AiFillCaretDown, AiFillCaretRight, AiFillHome } from 'react-icons/ai'
+import {
+    AiFillCaretDown,
+    AiFillCaretRight,
+    AiFillHome,
+    AiOutlineCheck
+} from 'react-icons/ai'
 import Heading from '../heading/heading'
 
 const Sidebar: FC<{ isHidden: boolean }> = ({ isHidden }) => {
     const [isCatHidden, setIsCatHidden] = useState(false)
     const [categorys, setCategorys] = useState<ICategory[]>([])
+    const router = useRouter()
+    const { slug } = router.query
 
     const { items } = useCart()
     const fetchCategory = async () => {
@@ -66,10 +73,17 @@ const Sidebar: FC<{ isHidden: boolean }> = ({ isHidden }) => {
                                         <h2 className='font-semibold text-2xl text-white'>
                                             {category.name}
                                         </h2>
-                                        <AiFillCaretRight
-                                            color='white'
-                                            size={'35px'}
-                                        />
+                                        {slug === category.slug ? (
+                                            <AiOutlineCheck
+                                                color='white'
+                                                size={'35px'}
+                                            />
+                                        ) : (
+                                            <AiFillCaretRight
+                                                color='white'
+                                                size={'35px'}
+                                            />
+                                        )}
                                     </div>
                                 </button>
                             ))}
