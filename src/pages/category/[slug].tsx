@@ -34,7 +34,7 @@ const ProductPage = () => {
         <Meta title='Category'>
             <Layout>
                 <Catalog
-                    title={`Category ${product[0].category.name}`}
+                    title={`Category ${product[0]?.category.name}`}
                     products={product || []}
                 />
             </Layout>

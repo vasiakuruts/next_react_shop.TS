@@ -24,7 +24,7 @@ const CartCount: FC<PropsWithChildren<IButton>> = ({
                             className=' absolute font-bold text-xl -mt-1 z-10 font-mono'
                             style={{ paddingLeft: '5px', color: 'white' }}
                         >
-                            {items.length}
+                            {items.length > 9 ? '9+' : items.length}
                         </h1>
                         <GiPlainCircle
                             className=' absolute'
