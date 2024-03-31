@@ -3,7 +3,6 @@ import Heading from '@/components/ui/heading/heading'
 import Field from '@/components/ui/input/field'
 import FieldPassword from '@/components/ui/input/field-password'
 import Loader from '@/components/ui/loader/loader'
-import Meta from '@/components/ui/meta/meta'
 import { useActions } from '@/hooks/useActions'
 import { useAuth } from '@/hooks/useAuth'
 import { useAuthRedirect } from '@/hooks/useAuthRedirect'
@@ -34,7 +33,7 @@ const AuthComponents: FC = () => {
         reset()
     }
     return (
-        <section className='flex h-screen '>
+        <section className='flex '>
             <form
                 onSubmit={handleSubmit(onSubmit)}
                 className='rounded-lg bg-white shadow-sm border p-8 m-auto  max-w-md'

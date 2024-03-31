@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useState } from 'react'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { IoMdClose } from 'react-icons/io'
-import PrimaryAppBar from '../header/app_bar'
+import PrimaryAppBar from '../header/app-bar'
 import Sidebar from '../sidebar/sidebar'
 
 const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {
