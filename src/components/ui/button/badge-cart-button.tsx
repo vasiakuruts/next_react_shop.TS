@@ -2,11 +2,13 @@ import { useCart } from '@/hooks/useCart'
 import { Badge, Box, IconButton, Link, Modal } from '@mui/material'
 import { useRouter } from 'next/router'
 import * as React from 'react'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { IoMdCart } from 'react-icons/io'
 import CatalogCart from '../catalog/catalogCart'
 
-const BadgeCartButton: FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
+const BadgeCartButton: FC<{
+    isMobile?: boolean
+}> = ({ isMobile = false }) => {
     const [anchorCartEl, setAnchorCartEl] = React.useState<null | HTMLElement>(
         null
     )
@@ -17,10 +19,17 @@ const BadgeCartButton: FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
     const handleCartOpen = (event: React.MouseEvent<HTMLElement>) => {
         isMobile ? router.push('/cart') : setAnchorCartEl(event.currentTarget)
     }
+    const OnIsMobile = isMobile
+        ? router.pathname === '/cart'
+        : router.pathname !== '/cart'
 
     const handleCartClose = () => {
         setAnchorCartEl(null)
     }
+    useEffect(() => {
+        if (items.length === 0) handleCartClose()
+    }, [items])
+
     const CartId = 'primary-cart'
     const renderCart = (
         <Modal
@@ -43,12 +52,16 @@ const BadgeCartButton: FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
     )
     return (
         <>
-            {router.pathname !== '/cart' && (
+            {OnIsMobile && (
                 <IconButton
                     size='large'
                     aria-label='show 4 new mails'
                     color='inherit'
                     onClick={handleCartOpen}
+                    sx={{
+                        marginBottom: isMobile ? '-10px' : '',
+                        marginTop: isMobile ? '-10px' : ''
+                    }}
                 >
                     <Badge badgeContent={items.length} color='error'>
                         <IoMdCart />
