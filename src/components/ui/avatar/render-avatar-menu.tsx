@@ -90,7 +90,7 @@ const RenderAvatarMenu: FC = () => {
                         display: 'block',
                         position: 'absolute',
                         top: 0,
-                        right: 14,
+                        right: 22,
                         width: 10,
                         height: 10,
                         bgcolor: 'background.paper',
