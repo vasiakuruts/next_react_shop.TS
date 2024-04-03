@@ -43,7 +43,7 @@ const ProductItemCart: FC<{ items: ICartItem }> = ({ items }) => {
         setIsHiddenOk(true)
     }
     return (
-        <div className='flex items-center bg-white rounded-xl overflow-hidden mb-4'>
+        <div className='flex items-center bg-white rounded-xl overflow-hidden mb-2'>
             <div className='m-2'>
                 <DynamicFavorteButton size={30} productId={items.product.id} />
             </div>
