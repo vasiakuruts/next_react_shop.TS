@@ -1,14 +1,12 @@
 import { useCart } from '@/hooks/useCart'
-import { Badge, Box, IconButton, Link, Modal } from '@mui/material'
+import { Badge, Box, IconButton, Link, Menu, styled } from '@mui/material'
 import { useRouter } from 'next/router'
 import * as React from 'react'
 import { FC, useEffect } from 'react'
 import { IoMdCart } from 'react-icons/io'
 import CatalogCart from '../catalog/catalogCart'
 
-const BadgeCartButton: FC<{
-    isMobile?: boolean
-}> = ({ isMobile = false }) => {
+const BadgeCartButton: FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
     const [anchorCartEl, setAnchorCartEl] = React.useState<null | HTMLElement>(
         null
     )
@@ -19,27 +17,55 @@ const BadgeCartButton: FC<{
     const handleCartOpen = (event: React.MouseEvent<HTMLElement>) => {
         isMobile ? router.push('/cart') : setAnchorCartEl(event.currentTarget)
     }
-    const OnIsMobile = isMobile
-        ? router.pathname === '/cart'
-        : router.pathname !== '/cart'
-
     const handleCartClose = () => {
         setAnchorCartEl(null)
     }
+    const OnIsMobile = isMobile ? isMobile : router.pathname !== '/cart'
+
     useEffect(() => {
         if (items.length === 0) handleCartClose()
     }, [items])
 
+    const StyledMenu = styled(Menu)({
+        '& .MuiMenu-paper': {
+            maxHeight: '100%',
+            overflowY: 'auto',
+            '&::-webkit-scrollbar': {
+                width: '0.4em' // Ширина прокрутки
+            },
+            '&::-webkit-scrollbar-thumb': {
+                backgroundColor: '#888', // Колір пальця прокрутки
+                borderRadius: '4px' // Радіус кутиків пальця прокрутки
+            }
+        }
+    })
+
     const CartId = 'primary-cart'
     const renderCart = (
-        <Modal
+        <Menu
+            anchorEl={anchorCartEl}
             id={CartId}
             open={isCartOpen && items.length !== 0}
             onClose={handleCartClose}
-            aria-labelledby='modal-modal-title'
-            aria-describedby='modal-modal-description'
+            sx={{
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiMenu-paper': {
+                    maxHeight: '90%',
+                    overflowY: 'auto',
+                    '&::-webkit-scrollbar': {
+                        width: '0.4em' // Ширина прокрутки
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                        backgroundColor: '#888', // Колір пальця прокрутки
+                        borderRadius: '4px' // Радіус кутиків пальця прокрутки
+                    }
+                }
+            }}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <Box className=' absolute top-16 left-1/2 -translate-x-1/2 p-5 max-h-full overflow-y-auto z-10 bg-black rounded-xl'>
+            <Box className=' p-5 bg-black rounded-xl'>
                 <CatalogCart items={items || []} />
                 <Link
                     href={'/cart'}
@@ -48,7 +74,7 @@ const BadgeCartButton: FC<{
                     Cart Page
                 </Link>
             </Box>
-        </Modal>
+        </Menu>
     )
     return (
         <>

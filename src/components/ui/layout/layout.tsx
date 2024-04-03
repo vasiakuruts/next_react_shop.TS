@@ -16,17 +16,6 @@ const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {
                     gridTemplateColumns: `${sidebarHidden ? '1fr 4fr' : ''}`
                 }}
             >
-                <Sidebar isHidden={sidebarHidden} />
-                <button
-                    className=' cursor-pointer absolute text-primary h-2 w-2'
-                    onClick={() => setSidebarHidden(!sidebarHidden)}
-                >
-                    {sidebarHidden ? (
-                        <IoMdClose size={'40px'} />
-                    ) : (
-                        <GiHamburgerMenu size={'40px'} />
-                    )}
-                </button>
                 <main className='p-12'>{children}</main>
             </div>
         </div>

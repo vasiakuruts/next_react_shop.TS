@@ -3,15 +3,15 @@ import useIsMobile from '@/hooks/useIsMobile'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
 import Fab from '@mui/material/Fab'
-import IconButton from '@mui/material/IconButton'
 import InputBase from '@mui/material/InputBase'
 import { alpha, styled } from '@mui/material/styles'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import { useRouter } from 'next/router'
-import { IoIosMenu, IoMdSearch } from 'react-icons/io'
+import { IoMdSearch } from 'react-icons/io'
 import RenderAvatarMenu from '../avatar/render-avatar-menu'
 import BadgeCartButton from '../button/badge-cart-button'
+import Sidebar from '../sidebar/sidebar'
 import BottomBar from './bottom-bar'
 
 const Search = styled('div')(({ theme }) => ({
@@ -72,15 +72,7 @@ export default function PrimaryAppBar() {
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position='static'>
                     <Toolbar>
-                        <IconButton
-                            size='large'
-                            edge='start'
-                            color='inherit'
-                            aria-label='open drawer'
-                            sx={{ mr: 2 }}
-                        >
-                            <IoIosMenu />
-                        </IconButton>
+                        <Sidebar />
                         <Typography
                             variant='h6'
                             noWrap
