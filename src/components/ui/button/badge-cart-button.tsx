@@ -65,7 +65,7 @@ const BadgeCartButton: FC<{ isMobile?: boolean }> = ({ isMobile = false }) => {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <Box className=' p-5 bg-black rounded-xl'>
+            <Box className=' p-2 -my-2 bg-black'>
                 <CatalogCart items={items || []} />
                 <Link
                     href={'/cart'}

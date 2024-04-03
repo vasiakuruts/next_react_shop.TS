@@ -1,7 +1,7 @@
 import { useCart } from '@/hooks/useCart'
 import { CategoryService } from '@/services/category/category.service'
 import { ICategory } from '@/types/category.interface'
-import { IconButton, Menu } from '@mui/material'
+import { IconButton, Popper } from '@mui/material'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import {
@@ -50,39 +50,10 @@ const Sidebar: FC = () => {
     const SideBarId = 'primary-side-bar'
     const renderSideBarMenu = (
         <>
-            <Menu
+            <Popper
                 anchorEl={anchorSideBarEl}
                 id={SideBarId}
                 open={isSideBarOpen}
-                onClose={handleSideBarClose}
-                PaperProps={{
-                    elevation: 0,
-                    sx: {
-                        overflow: 'visible',
-                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                        mt: 1.5,
-                        '& .MuiAvatar-root': {
-                            width: 32,
-                            height: 32,
-                            ml: -0.5,
-                            mr: 1
-                        },
-                        '&::before': {
-                            content: '""',
-                            display: 'block',
-                            position: 'absolute',
-                            top: 0,
-                            left: 18,
-                            width: 10,
-                            height: 10,
-                            bgcolor: 'background.paper',
-                            transform: 'translateY(-50%) rotate(45deg)',
-                            zIndex: 0
-                        }
-                    }
-                }}
-                transformOrigin={{ horizontal: 'left', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'left', vertical: 'bottom' }}
             >
                 <aside className=' p-5  w-64 bg-secondary'>
                     <Heading className=' w-full text-center pb-6'>
@@ -148,7 +119,7 @@ const Sidebar: FC = () => {
                         </button>
                     </div>
                 </aside>
-            </Menu>
+            </Popper>
         </>
     )
 
@@ -163,7 +134,7 @@ const Sidebar: FC = () => {
                 color='inherit'
                 aria-label='open drawer'
                 sx={{ mr: 2 }}
-                onClick={handleSideBarOpen}
+                onClick={isSideBarOpen ? handleSideBarClose : handleSideBarOpen}
             >
                 {isSideBarOpen ? <IoMdClose /> : <IoIosMenu />}
             </IconButton>

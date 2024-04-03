@@ -18,12 +18,13 @@ const AuthProvider: FC<PropsWithChildren<TComponentAuthFields>> = ({
     let x
 
     useEffect(() => {
-        const accessToken = getAccessToken()
-
-        if (!accessToken) {
-            return undefined
-        } else {
-            checkAuth()
+        if (!!user) {
+            const accessToken = getAccessToken()
+            if (!!accessToken) {
+                checkAuth()
+            } else {
+                return undefined
+            }
         }
     }, [])
 
