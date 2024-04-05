@@ -1,7 +1,8 @@
 import { useCart } from '@/hooks/useCart'
 import { CategoryService } from '@/services/category/category.service'
 import { ICategory } from '@/types/category.interface'
-import { IconButton, Popper } from '@mui/material'
+import { Box, Container, IconButton, Popper, Typography } from '@mui/material'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { FC, useEffect, useState } from 'react'
 import {
@@ -55,22 +56,21 @@ const Sidebar: FC = () => {
                 id={SideBarId}
                 open={isSideBarOpen}
             >
-                <aside className=' p-5  w-64 bg-secondary'>
+                <Container className=' p-5  w-64 bg-secondary'>
                     <Heading className=' w-full text-center pb-6'>
                         SIDEBAR
                     </Heading>
-
-                    <div className=' flex flex-col'>
-                        <button onClick={() => router.push('/')}>
-                            <div className='flex bg-primary rounded mr-6 justify-between mb-2'>
+                    <Box className=' flex flex-col'>
+                        <Link href={'/'}>
+                            <Box className='flex bg-primary rounded mr-6 justify-between mb-2'>
                                 <Heading className=' text-white flex '>
                                     Home
                                 </Heading>
                                 <AiFillHome color='white' size={'35px'} />
-                            </div>
-                        </button>
+                            </Box>
+                        </Link>
                         <button onClick={() => setIsCatHidden(!isCatHidden)}>
-                            <div className='flex bg-primary rounded mr-6 justify-between mb-2'>
+                            <Box className='flex bg-primary rounded mr-6 justify-between mb-2'>
                                 <Heading className=' text-white flex'>
                                     Category
                                 </Heading>
@@ -85,46 +85,47 @@ const Sidebar: FC = () => {
                                         size={'35px'}
                                     />
                                 )}
-                            </div>
+                            </Box>
                             {isCatHidden && (
-                                <div className='ml-4 flex flex-col mb-2'>
+                                <Box className='ml-4 flex flex-col mb-2'>
                                     {categorys.map(category => (
-                                        <button
-                                            onClick={() =>
-                                                router.push(
-                                                    `/category/${category.slug}`
-                                                )
-                                            }
-                                        >
-                                            <div className='flex bg-primary rounded mr-6 justify-between mb-1'>
-                                                <h2 className='font-semibold text-2xl text-white'>
-                                                    {category.name}
-                                                </h2>
-                                                {slug === category.slug ? (
-                                                    <AiOutlineCheck
-                                                        color='white'
-                                                        size={'35px'}
-                                                    />
-                                                ) : (
-                                                    <AiFillCaretRight
-                                                        color='white'
-                                                        size={'35px'}
-                                                    />
-                                                )}
-                                            </div>
-                                        </button>
+                                        <Box key={category.id}>
+                                            <Link
+                                                href={`/category/${category.slug}`}
+                                            >
+                                                <Box className='flex bg-primary rounded mr-6 justify-between mb-1'>
+                                                    <Typography
+                                                        variant='h6'
+                                                        className='font-semibold text-2xl text-white'
+                                                    >
+                                                        {category.name}
+                                                    </Typography>
+                                                    {slug === category.slug ? (
+                                                        <AiOutlineCheck
+                                                            color='white'
+                                                            size={'35px'}
+                                                        />
+                                                    ) : (
+                                                        <AiFillCaretRight
+                                                            color='white'
+                                                            size={'35px'}
+                                                        />
+                                                    )}
+                                                </Box>
+                                            </Link>
+                                        </Box>
                                     ))}
-                                </div>
+                                </Box>
                             )}
                         </button>
-                    </div>
-                </aside>
+                    </Box>
+                </Container>
             </Popper>
         </>
     )
 
     if (!categorys) {
-        return <div>Loading...</div>
+        return <Box>Loading...</Box>
     }
     return (
         <>
