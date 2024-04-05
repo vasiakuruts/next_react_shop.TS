@@ -18,8 +18,6 @@ const ProductPage = () => {
             console.error('Failed to fetch product')
         }
     }
-
-    // Run the 'fetchProduct' function when the slug is available
     useEffect(() => {
         if (slug) {
             fetchProduct()
