@@ -1,5 +1,8 @@
+import { useProfile } from '@/hooks/useProfile'
 import { ICartItem } from '@/types/cart.interface'
 import {
+    Box,
+    Container,
     Paper,
     Table,
     TableBody,
@@ -20,20 +23,20 @@ interface ICatalog {
 }
 
 const CatalogCart: FC<ICatalog> = ({ items, isLoading, title }) => {
+    const { profile } = useProfile()
+
     const renderCartTable = (
         <>
-            <TableContainer component={Paper}>
-                <Table aria-label='collapsible table'>
+            <TableContainer component={Paper} sx={{ maxHeight: 1000 }}>
+                <Table stickyHeader aria-label='collapsible table'>
                     <TableHead>
                         <TableRow>
-                            <TableCell />
-                            <TableCell />
-                            <TableCell>Name</TableCell>
+                            {profile && <TableCell>Favorite</TableCell>}
+                            <TableCell>Image</TableCell>
+                            <TableCell>Name Product</TableCell>
                             <TableCell align='right'>Price</TableCell>
                             <TableCell align='right'>Amount</TableCell>
-                            <TableCell align='right'>Common price</TableCell>
-                            <TableCell />
-                            <TableCell />
+                            <TableCell align='right'>Common Price</TableCell>
                             <TableCell />
                         </TableRow>
                     </TableHead>
@@ -52,19 +55,10 @@ const CatalogCart: FC<ICatalog> = ({ items, isLoading, title }) => {
 
     if (isLoading) return <Loader />
     return (
-        <section>
+        <Container>
             {title && <Heading className='mb-5'>{title}</Heading>}
-            {items.length ? (
-                <div className=' container mx-auto'>
-                    {renderCartTable}
-                    {/* {items.map(items => (
-                        <ProductItemCart key={items.product.id} items={items} />
-                    ))} */}
-                </div>
-            ) : (
-                <div>There are no products</div>
-            )}
-        </section>
+            {items.length ? renderCartTable : <Box>There are no products</Box>}
+        </Container>
     )
 }
 

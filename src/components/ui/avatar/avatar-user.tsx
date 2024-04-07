@@ -18,7 +18,6 @@ const AvatarUser: FC = () => {
             ) : (
                 <Typography
                     variant='h5'
-                    component='button'
                     sx={{ flexGrow: 1, textTransform: 'uppercase' }}
                 >
                     Login

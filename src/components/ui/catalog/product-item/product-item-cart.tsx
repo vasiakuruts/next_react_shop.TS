@@ -1,13 +1,12 @@
 import { useActions } from '@/hooks/useActions'
+import { useProfile } from '@/hooks/useProfile'
 import { ICartItem } from '@/types/cart.interface'
 import { convertPrice } from '@/utils/convert-price'
-import { TableCell, TableRow } from '@mui/material'
+import { Avatar, Button, ButtonGroup, TableCell, TableRow } from '@mui/material'
 import dynamic from 'next/dynamic'
-import Image from 'next/image'
 import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 import { AiOutlineDelete, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
-import Button from '../../button/button'
 
 const DynamicFavorteButton = dynamic(() => import('./favorite-button'), {
     ssr: false
@@ -17,6 +16,7 @@ const ProductItemCart: FC<{ items: ICartItem }> = ({ items }) => {
     const { changeQuntity, changeQuntityType, removeFromCart } = useActions()
     const [inputValue, setInputValue] = useState(items.quantity)
     const [isHiddenOk, setIsHiddenOk] = useState(true)
+    const { profile } = useProfile()
     useEffect(() => {
         setInputValue(items.quantity)
     }, [items.quantity])
@@ -41,25 +41,20 @@ const ProductItemCart: FC<{ items: ICartItem }> = ({ items }) => {
     return (
         <>
             <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
-                <TableCell>
-                    <DynamicFavorteButton
-                        size={30}
-                        productId={items.product.id}
-                    />
-                </TableCell>
+                {profile && (
+                    <TableCell>
+                        <DynamicFavorteButton
+                            size={30}
+                            productId={items.product.id}
+                        />
+                    </TableCell>
+                )}
                 <TableCell>
                     <Link href={`/product/${items.product.slug}`}>
-                        <Image
-                            width={80}
-                            height={80}
+                        <Avatar
                             src={items.product.images[0]}
                             alt={items.product.name}
-                            className=' w-1/6'
-                            style={{
-                                width: '80px',
-                                height: '80px',
-                                border: '1px solid #000000'
-                            }}
+                            variant='rounded'
                         />
                     </Link>
                 </TableCell>
@@ -74,39 +69,38 @@ const ProductItemCart: FC<{ items: ICartItem }> = ({ items }) => {
                     {convertPrice(items.price * items.quantity)}
                 </TableCell>
                 <TableCell align='right'>
-                    <Button
-                        variant='orange'
-                        onClick={() =>
-                            changeQuntityType({
-                                id: items.id,
-                                type: 'plus'
-                            })
-                        }
+                    <ButtonGroup
+                        orientation='vertical'
+                        variant='contained'
+                        aria-label='Basic button group'
                     >
-                        <AiOutlinePlus />
-                    </Button>
-                </TableCell>
-                <TableCell align='right'>
-                    <Button
-                        disabled={items.quantity === 1}
-                        variant='orange'
-                        onClick={() =>
-                            changeQuntityType({
-                                id: items.id,
-                                type: 'minus'
-                            })
-                        }
-                    >
-                        <AiOutlineMinus />
-                    </Button>
-                </TableCell>
-                <TableCell align='right'>
-                    <Button
-                        variant='orange'
-                        onClick={() => removeFromCart({ id: items.id })}
-                    >
-                        <AiOutlineDelete />
-                    </Button>
+                        <Button
+                            onClick={() =>
+                                changeQuntityType({
+                                    id: items.id,
+                                    type: 'plus'
+                                })
+                            }
+                        >
+                            <AiOutlinePlus />
+                        </Button>
+                        <Button
+                            disabled={items.quantity === 1}
+                            onClick={() =>
+                                changeQuntityType({
+                                    id: items.id,
+                                    type: 'minus'
+                                })
+                            }
+                        >
+                            <AiOutlineMinus />
+                        </Button>
+                        <Button
+                            onClick={() => removeFromCart({ id: items.id })}
+                        >
+                            <AiOutlineDelete />
+                        </Button>
+                    </ButtonGroup>
                 </TableCell>
             </TableRow>
         </>

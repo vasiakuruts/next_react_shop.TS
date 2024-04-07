@@ -9,7 +9,6 @@ import { useCart } from '@/hooks/useCart'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { IoLogIn, IoLogInOutline } from 'react-icons/io5'
-import CartCount from '../button/catrs-count'
 import CatalogCart from '../catalog/catalogCart'
 import Heading from '../heading/heading'
 import Profile from '../porofile/profile'
@@ -34,13 +33,7 @@ const Header: FC = () => {
             <Heading className=' w-full text-center text-white pb-6'>
                 Header
             </Heading>
-            {router.pathname !== '/cart' && (
-                <CartCount
-                    onClick={() => {
-                        if (items.length !== 0) setHiddenCart(!isHiddenCart)
-                    }}
-                />
-            )}
+
             {isHiddenCart && items.length !== 0 && (
                 <div className=' absolute top-16 left-1/2 -translate-x-1/2 p-5 max-h-full overflow-y-auto z-10 bg-black rounded-xl'>
                     <CatalogCart items={items || []} />

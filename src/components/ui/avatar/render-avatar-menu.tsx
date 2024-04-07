@@ -110,7 +110,7 @@ const RenderAvatarMenu: FC = () => {
                 </Typography>
             </MenuItem>
             <Divider />
-            <MenuItem onClick={() => router.push('favorite')}>
+            <MenuItem onClick={() => router.push('/favorite')}>
                 <ListItemIcon>
                     <AiFillHeart />
                 </ListItemIcon>
