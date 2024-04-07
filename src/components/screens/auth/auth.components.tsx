@@ -9,8 +9,20 @@ import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 import { IEmailPassword } from '@/store/user/user.interface'
 import { FC, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { AiOutlineLock, AiOutlineMail } from 'react-icons/ai'
+import {
+    AiOutlineEye,
+    AiOutlineEyeInvisible,
+    AiOutlineLock,
+    AiOutlineMail
+} from 'react-icons/ai'
 import { validEmail } from './valid-email'
+import {
+    FormControl,
+    IconButton,
+    Input,
+    InputAdornment,
+    InputLabel
+} from '@mui/material'
 
 const AuthComponents: FC = () => {
     useAuthRedirect()
@@ -31,6 +43,15 @@ const AuthComponents: FC = () => {
             login(data)
         } else register(data)
         reset()
+    }
+    const [showPassword, setShowPassword] = useState(false)
+
+    const handleClickShowPassword = () => setShowPassword(show => !show)
+
+    const handleMouseDownPassword = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault()
     }
     return (
         <section className='flex '>
@@ -58,8 +79,47 @@ const AuthComponents: FC = () => {
                             error={errors.email?.message}
                             Icon={AiOutlineMail}
                         />
+                        {/* <FormControl
+                            sx={{ m: 1, width: '25ch' }}
+                            variant='standard'
+                        >
+                            <InputLabel htmlFor='standard-adornment-password'>
+                                <span className='mb-1 flex'>
+                                    <AiOutlineLock /> {'Password'}
+                                </span>
+                            </InputLabel>
+                            <Input
+                                id='standard-adornment-password'
+                                type={showPassword ? 'text' : 'password'}
+                                {...formRegister('password', {
+                                    required: 'Password is required',
+                                    minLength: {
+                                        value: 6,
+                                        message:
+                                            'Min length should more 6 symbols'
+                                    }
+                                })}
+                                endAdornment={
+                                    <InputAdornment position='end'>
+                                        <IconButton
+                                            aria-label='toggle password visibility'
+                                            onClick={handleClickShowPassword}
+                                            onMouseDown={
+                                                handleMouseDownPassword
+                                            }
+                                        >
+                                            {showPassword ? (
+                                                <AiOutlineEyeInvisible />
+                                            ) : (
+                                                <AiOutlineEye />
+                                            )}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                        </FormControl> */}
                         <FieldPassword
-                            {...formRegister('password', {
+                            passwordProps={formRegister('password', {
                                 required: 'Password is required',
                                 minLength: {
                                     value: 6,
