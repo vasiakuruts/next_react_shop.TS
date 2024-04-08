@@ -11,7 +11,6 @@ import { useRouter } from 'next/router'
 import { IoLogIn, IoLogInOutline } from 'react-icons/io5'
 import CatalogCart from '../catalog/catalogCart'
 import Heading from '../heading/heading'
-import Profile from '../porofile/profile'
 
 const Header: FC = () => {
     const [isHiddenAuth, setHiddenAuth] = useState(false)
@@ -64,9 +63,7 @@ const Header: FC = () => {
                             />
                         </button>
                         {isHiddenOption && (
-                            <div className=' bg-secondary absolute grid top-16 w\12  right-0 h-0 z-10 '>
-                                <Profile />
-                            </div>
+                            <div className=' bg-secondary absolute grid top-16 w\12  right-0 h-0 z-10 '></div>
                         )}
                     </div>
                 </>
