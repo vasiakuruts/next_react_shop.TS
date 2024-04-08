@@ -1,24 +1,31 @@
+import useIsMobile from '@/hooks/useIsMobile'
+import { Box, Container } from '@mui/material'
 import { FC, PropsWithChildren, useState } from 'react'
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { IoMdClose } from 'react-icons/io'
 import PrimaryAppBar from '../header/app-bar'
-import Sidebar from '../sidebar/sidebar'
 
 const Layout: FC<PropsWithChildren<unknown>> = ({ children }) => {
     const [sidebarHidden, setSidebarHidden] = useState(false)
+    const isMobile = useIsMobile()
     return (
-        <div>
+        <Container
+            sx={{
+                padding: 0
+            }}
+            disableGutters
+        >
             <PrimaryAppBar />
             {/* <Header /> */}
-            <div
-                className='grid'
+            <Box
                 style={{
-                    gridTemplateColumns: `${sidebarHidden ? '1fr 4fr' : ''}`
+                    gridTemplateColumns: sidebarHidden ? '1fr 4fr' : '',
+                    display: isMobile ? 'block' : 'grid',
+                    padding: isMobile ? '0px' : '48px',
+                    overflowY: 'hidden'
                 }}
             >
-                <main className='p-12'>{children}</main>
-            </div>
-        </div>
+                {children}
+            </Box>
+        </Container>
     )
 }
 

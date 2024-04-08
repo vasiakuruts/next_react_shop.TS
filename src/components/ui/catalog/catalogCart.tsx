@@ -1,8 +1,9 @@
+import useHeight from '@/hooks/useHeigth'
+import useIsMobile from '@/hooks/useIsMobile'
 import { useProfile } from '@/hooks/useProfile'
 import { ICartItem } from '@/types/cart.interface'
 import {
     Box,
-    Container,
     Paper,
     Table,
     TableBody,
@@ -12,7 +13,6 @@ import {
     TableRow
 } from '@mui/material'
 import { FC } from 'react'
-import Heading from '../heading/heading'
 import Loader from '../loader/loader'
 import ProductItemCart from './product-item/product-item-cart'
 
@@ -24,12 +24,20 @@ interface ICatalog {
 
 const CatalogCart: FC<ICatalog> = ({ items, isLoading, title }) => {
     const { profile } = useProfile()
+    const heigth = useHeight()
+    const isMobile = useIsMobile()
 
     const renderCartTable = (
         <>
-            <TableContainer component={Paper} sx={{ maxHeight: 1000 }}>
+            <TableContainer
+                component={Paper}
+                sx={{ maxHeight: `${heigth - (isMobile ? 60 : 120)}px` }}
+            >
                 <Table stickyHeader aria-label='collapsible table'>
                     <TableHead>
+                        <TableRow>
+                            <TableCell>{title}</TableCell>
+                        </TableRow>
                         <TableRow>
                             {profile && <TableCell>Favorite</TableCell>}
                             <TableCell>Image</TableCell>
@@ -55,10 +63,7 @@ const CatalogCart: FC<ICatalog> = ({ items, isLoading, title }) => {
 
     if (isLoading) return <Loader />
     return (
-        <Container>
-            {title && <Heading className='mb-5'>{title}</Heading>}
-            {items.length ? renderCartTable : <Box>There are no products</Box>}
-        </Container>
+        <>{items.length ? renderCartTable : <Box>There are no products</Box>}</>
     )
 }
 
