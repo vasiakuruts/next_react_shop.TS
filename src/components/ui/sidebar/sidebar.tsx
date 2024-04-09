@@ -55,6 +55,7 @@ const Sidebar: FC = () => {
                 anchorEl={anchorSideBarEl}
                 id={SideBarId}
                 open={isSideBarOpen}
+                sx={{ zIndex: 10 }}
             >
                 <Container className=' p-5  w-64 bg-secondary'>
                     <Heading className=' w-full text-center pb-6'>
