@@ -1,3 +1,4 @@
+import { useAuth } from '@/hooks/useAuth'
 import { IProduct } from '@/types/product.interface'
 import { convertPrice } from '@/utils/convert-price'
 import { Box, Card } from '@mui/material'
@@ -13,6 +14,8 @@ const DynamicFavorteButton = dynamic(() => import('./favorite-button'), {
 })
 
 const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
+    const { user } = useAuth()
+
     return (
         <Card>
             <Box
@@ -20,8 +23,9 @@ const ProductItem: FC<{ product: IProduct }> = ({ product }) => {
                     position: 'absolute',
                     padding: '8px'
                 }}
+                key={product.id}
             >
-                <DynamicFavorteButton productId={product.id} />
+                {!!user && <DynamicFavorteButton productId={product.id} />}
                 <AddToCartButton product={product} />
             </Box>
             <ProductImageStepper images={product.images} />
